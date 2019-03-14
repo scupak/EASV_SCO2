@@ -33,7 +33,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception {
         
-        String connectionString = "jdbc:sqlserver://;database=;user=;password=";
+        String connectionString = "";
         
         //Initialize DB objects
         Connection conn = null;        
