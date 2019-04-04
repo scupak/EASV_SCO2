@@ -1,6 +1,8 @@
 
 package funwithsorting;
 
+import java.util.Objects;
+
 /**
  *
  * @author smsj
@@ -18,7 +20,6 @@ public class Car implements Comparable<Car>{
         this.color = color;
         this.topSpeed = topSpeed;
     }
-
         
     
     public String getBrand() {
@@ -60,7 +61,46 @@ public class Car implements Comparable<Car>{
 
     @Override
     public int compareTo(Car other) {
-        return this.model.compareTo(other.model);
+        return this.color.compareTo(other.color);
     }   
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.brand);
+        hash = 41 * hash + Objects.hashCode(this.model);
+        hash = 41 * hash + Objects.hashCode(this.color);
+        hash = 41 * hash + this.topSpeed;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Car other = (Car) obj;
+        if (this.topSpeed != other.topSpeed) {
+            return false;
+        }
+        if (!Objects.equals(this.brand, other.brand)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
+            return false;
+        }
+        if (!Objects.equals(this.color, other.color)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }

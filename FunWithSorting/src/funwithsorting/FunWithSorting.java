@@ -16,8 +16,18 @@ public class FunWithSorting {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-          
-          //Java - Lambda Expression
+         
+        int[] numbers = {1,5,12,15,19,23,45,67,78,97 }; 
+        int key = 24;
+        
+        int result = Arrays.binarySearch(numbers, key);
+        
+        System.out.println(result);
+        
+        
+        
+        
+        //Java - Lambda Expression
         Comparator<Car> byBrand = (Car car1, Car car2) -> car1.getBrand().compareTo(car2.getBrand());
         Comparator<Car> byColor = (Car car1, Car car2) -> car1.getColor().compareTo(car2.getColor());
         Comparator<Car> byTopSpeed2 = (Car car1, Car car2) -> car1.getTopSpeed() - car2.getTopSpeed();                
@@ -37,13 +47,14 @@ public class FunWithSorting {
         carArray[3] = c4;
         
         
-        Arrays.sort(carArray, byTopSpeed2);
+        Arrays.sort(carArray);
+        System.out.println("Looking for " + c3);
+        result = Arrays.binarySearch(carArray, 0, carArray.length, c3);
+        System.out.println("Car found at index:" + result);
         
         System.out.println("Arrays.sort()....");
         for (Car c: carArray)
             System.out.println(c);
-        
-        
         
         
         ArrayList<Car> cars = new ArrayList<Car>();
