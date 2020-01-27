@@ -10,15 +10,15 @@ public class LayoutsDemo extends Application {
 
     @Override
     /**
-     * Initialize the stage and add controls
+     * Initialize the stage
      */
     public void start(Stage primaryStage) throws Exception {
         
         BorderPaneCreator borderPane = new BorderPaneCreator();
         
-        Scene scene = new Scene(getFlowPane(), 300, 250);
+        //Scene scene = new Scene(getFlowPane(), 300, 250);
         //Scene scene = new Scene(getGridPane(), 300, 250);
-        //Scene scene = new Scene(borderPane.getBorderPaneSample(), 300, 250);
+        Scene scene = new Scene(borderPane.getBorderPaneSample(), 300, 250);
         
         primaryStage.setTitle("FlowPane Layout");
         primaryStage.setScene(scene);
