@@ -28,6 +28,11 @@ import javafx.scene.text.Text;
  */
 public class BorderPaneCreator {
     
+    /**
+     * Utility method that creates a sample BorderPane layout
+     * 
+     * @return 
+     */
     public BorderPane getBorderPaneSample() {
         BorderPane border = new BorderPane();
         HBox hbox = addHBox();
@@ -38,6 +43,11 @@ public class BorderPaneCreator {
         return border;
     }
     
+    /**
+     * Creates a VBox with Hyperlinks
+     * 
+     * @return 
+     */
     private VBox addVBox() {
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(10));
@@ -56,6 +66,12 @@ public class BorderPaneCreator {
 
         return vbox;
     }
+    
+    /**
+     * Creates an HBox with two buttons (with no eventhandler)
+     * 
+     * @return 
+     */
     private HBox addHBox() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
@@ -71,21 +87,30 @@ public class BorderPaneCreator {
 
         return hbox;
     }
+    
+    /**
+     * Creates a question mark button built using a StackPane
+     * 
+     * @param hb 
+     */
     private void addStackPane(HBox hb) {
         StackPane stack = new StackPane();
         Rectangle helpIcon = new Rectangle(30.0, 25.0);
+        
+        //Create gradient with an array of colors
         helpIcon.setFill(new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,
                 new Stop[]{
                     new Stop(0, Color.web("#4977A3")),
                     new Stop(0.5, Color.web("#B0C6DA")),
                     new Stop(1, Color.web("#9CB6CF")),}));
         helpIcon.setStroke(Color.web("#D0E6FA"));
-        helpIcon.setArcHeight(3.5);
-        helpIcon.setArcWidth(3.5);
+        helpIcon.setArcHeight(3.5); //rounded corners vertically
+        helpIcon.setArcWidth(3.5); //rounded corners horizontally
 
         Text helpText = new Text("?");
         helpText.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
         helpText.setFill(Color.WHITE);
+        
         helpText.setStroke(Color.web("#7080A0"));
 
         stack.getChildren().addAll(helpIcon, helpText);
