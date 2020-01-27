@@ -1,3 +1,5 @@
+package layoutsdemo;
+
 //Java imports
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,9 +18,9 @@ public class LayoutsDemo extends Application {
         
         BorderPaneCreator borderPane = new BorderPaneCreator();
         
-        //Scene scene = new Scene(getFlowPane(), 300, 250);
+        Scene scene = new Scene(getFlowPane(), 300, 250);
         //Scene scene = new Scene(getGridPane(), 300, 250);
-        Scene scene = new Scene(borderPane.getBorderPaneSample(), 300, 250);
+        //Scene scene = new Scene(borderPane.getBorderPaneSample(), 300, 250);
         
         primaryStage.setTitle("FlowPane Layout");
         primaryStage.setScene(scene);
@@ -43,6 +45,7 @@ public class LayoutsDemo extends Application {
     
     
     /**
+     * Build a sample GridPane
      * 
      * @return 
      */

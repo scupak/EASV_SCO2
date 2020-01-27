@@ -8,11 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="LayoutsDemo.jar" size="6141" download="eager" />
+    <jar href="LayoutsDemo.jar" size="6145" download="eager" />
   </resources>
 <security>
   <all-permissions/>
 </security>
-  <jfx:javafx-desc  width="800" height="600" main-class="LayoutsDemo"  name="LayoutsDemo" />
+  <jfx:javafx-desc  width="800" height="600" main-class="layoutsdemo.LayoutsDemo"  name="LayoutsDemo" />
   <update check="always"/>
 </jnlp>
