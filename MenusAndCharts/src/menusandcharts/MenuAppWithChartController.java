@@ -35,56 +35,68 @@ public class MenuAppWithChartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        handleShowBarChart();
     }
 
+    /**
+     *  Displays the Bar Chart
+     */
     @FXML
     private void handleShowBarChart() {
 
         borderPane.setCenter(buildBarChart());
     }
 
+    /**
+     *  Displays the Pie Chart
+     */
     @FXML
     private void handleShowPieChart() {
         borderPane.setCenter(buildPieChart());
     }
 
+    /**
+     * Builds the Bar Chart UI component with demo data
+     * 
+     * @return 
+     */
     private BarChart buildBarChart() {
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Most Popular Programming Language");
+        xAxis.setLabel("Product");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("# of developers x 1000");
+        yAxis.setLabel("quantity sold");
 
         BarChart barChart = new BarChart(xAxis, yAxis);
 
         XYChart.Series dataSeries1 = new XYChart.Series();
-        dataSeries1.setName("Popular programming languages rated by GitHub");
+        dataSeries1.setName("Products sold");
 
-        dataSeries1.getData().add(new XYChart.Data("JavaScript", 2300));
-        dataSeries1.getData().add(new XYChart.Data("Python", 1000));
-        dataSeries1.getData().add(new XYChart.Data("Java", 986));
-        dataSeries1.getData().add(new XYChart.Data("Ruby", 870));
-        dataSeries1.getData().add(new XYChart.Data("C++", 413));
-        dataSeries1.getData().add(new XYChart.Data("C#", 326));
+        dataSeries1.getData().add(new XYChart.Data("Product A", 3000));
+        dataSeries1.getData().add(new XYChart.Data("Product B", 1000));
+        dataSeries1.getData().add(new XYChart.Data("Product C", 150));
+        
         barChart.getData().add(dataSeries1);
-
+        barChart.setLegendVisible(false);
+        
         return barChart;
     }
 
+    /**
+     * Builds the Pie Chart UI component with demo data
+     * 
+     * @return 
+     */
     private PieChart buildPieChart() {
 
         //Preparing ObservbleList object         
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("JavaScript", 2300),
-                new PieChart.Data("Python", 1000),
-                new PieChart.Data("Java", 986),
-                new PieChart.Data("Ruby", 870),
-                new PieChart.Data("C++", 413),
-                new PieChart.Data("C#", 326));
+                new PieChart.Data("Product A", 3000),
+                new PieChart.Data("Product B", 1000),                
+                new PieChart.Data("Product C", 150));
 
         PieChart pieChart = new PieChart(pieChartData); //Creating a Pie chart      
-        pieChart.setTitle("Most Popular Programming Language"); //Setting the title of the Pie chart 
+        pieChart.setTitle("Products sold"); //Setting the title of the Pie chart 
         pieChart.setClockwise(true); //setting the direction to arrange the data 
         pieChart.setLabelLineLength(50); //Setting the length of the label line 
         pieChart.setLabelsVisible(true); //Setting the labels of the pie chart visible  
@@ -123,33 +135,20 @@ public class MenuAppWithChartController implements Initializable {
                   System.out.println("Handling with lambda expression with typed input parameter");
        
         });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+              
         return pieChart;
     }
 
     /**
-     *
+     *  Event handler to close the application
      */
     @FXML
     private void handleClose() {
         System.exit(0);
     }
-    
-    
+        
     /**
-     * 
+     *  Event handler to update the data in the Pie Chart
      */
     @FXML
     private void handleUpdatePieData() {
@@ -159,9 +158,7 @@ public class MenuAppWithChartController implements Initializable {
         {
             PieChart pc = (PieChart) node;
             double value = pc.getData().get(2).getPieValue();
-            pc.getData().get(2).setPieValue(value * 1.10);
+            pc.getData().get(2).setPieValue(750);
         }
-    }  
-    
-    
+    }          
 }
