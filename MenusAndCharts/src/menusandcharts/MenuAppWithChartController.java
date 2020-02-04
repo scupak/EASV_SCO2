@@ -2,6 +2,7 @@ package menusandcharts;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -102,42 +104,79 @@ public class MenuAppWithChartController implements Initializable {
         pieChart.setLabelsVisible(true); //Setting the labels of the pie chart visible  
         pieChart.setStartAngle(180);
 
+        
+        for (int i = 0; i < pieChartData.size() - 1; i++) {
+            Data currentElement = pieChartData.get(i);
+            
+            currentElement.nameProperty().bind(Bindings.concat(currentElement.getName(), " ", currentElement.pieValueProperty()));
+        }
+        
+        
+        //pieChartData.forEach(data ->
+        //data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty())));
+        
+        
+        
         ContextMenu contextMenu = new ContextMenu(); //create context menu
         MenuItem miSwitchToBarChart = new MenuItem("Switch to Bar Chart");
         contextMenu.getItems().add(miSwitchToBarChart);
         
         //Add event handler to display context menu
+        //Anonymous inner class
         pieChart.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        if (event.getButton() == MouseButton.SECONDARY) {
-                            contextMenu.show(pieChart, event.getScreenX(), event.getScreenY());
-                        }                        
-                    }
-                });
-               
+            new EventHandler<MouseEvent>() {                
+                public void handle(MouseEvent event) {
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        contextMenu.show(pieChart, event.getScreenX(), event.getScreenY());
+                    }                        
+                }
+            });
         
-        //Pre Java8
+        
+        
+
+//        //Java8
+//        miSwitchToBarChart.setOnAction((ActionEvent event) -> { 
+//            borderPane.setCenter(buildBarChart());
+//            System.out.println("Handling with lambda expression with typed input parameter");       
+//        });
+        
+        //Before Java 8
         //Add event handler to change chart type
-        miSwitchToBarChart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                borderPane.setCenter(buildBarChart());
-                System.out.println("Handling with inner anonymous class");
-            }
-        }); 
+//        miSwitchToBarChart.setOnAction(new EventHandler<ActionEvent>() {            
+//            public void handle(ActionEvent event) {
+//                borderPane.setCenter(buildBarChart());
+//                System.out.println("Handling with inner anonymous class");
+//            }
+//        });        
         
-        
-        //Java8
-        miSwitchToBarChart.setOnAction((ActionEvent event) -> { 
-                borderPane.setCenter(buildBarChart());
-                  System.out.println("Handling with lambda expression with typed input parameter");
-       
-        });
-              
+        //Get object from method 
+        miSwitchToBarChart.setOnAction(getEventHandlerObject());
+                
         return pieChart;
     }
+    
+    
+    /**
+     * Creates an event handler as name method
+     * 
+     * @return 
+     */
+    private EventHandler<ActionEvent> getEventHandlerObject() 
+    {
+        return new EventHandler<ActionEvent>() 
+        {
+            public void handle(ActionEvent event) 
+            {
+                borderPane.setCenter(buildBarChart());
+                System.out.println("Handling with named method.");       
+            }
+        };
+    }
+    
+    
+    
+    
 
     /**
      *  Event handler to close the application

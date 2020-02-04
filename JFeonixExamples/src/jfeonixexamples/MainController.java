@@ -44,11 +44,11 @@ public class MainController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        label.setText("");
-        //Thread t = new Thread(()->{
+        label.setText("Start heavy task...");
+        Thread t = new Thread(()->{
             simulateHardWork();
-        //});
-        //t.start();
+        });
+        t.start();
         //System.out.println("You clicked me!");
         
         
