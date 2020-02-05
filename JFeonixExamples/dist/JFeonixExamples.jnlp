@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JFeonixExamples.jar" size="5857" download="eager" />
+    <jar href="JFeonixExamples.jar" size="5091" download="eager" />
     <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="jfeonixexamples.JFeonixExamples"  name="JFeonixExamples" />

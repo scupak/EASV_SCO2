@@ -18,7 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;  
+import javafx.scene.control.Label;
 import javafx.util.StringConverter;
 
 /**
@@ -28,68 +28,56 @@ import javafx.util.StringConverter;
 public class MainController implements Initializable {
     
     @FXML
-    private Label label;
+    private JFXTextField txtDualBind;
     @FXML
-    private Button button;
+    private JFXSlider slider;
     @FXML
-    private JFXTextField txtSomeInput;
+    private JFXTextField txtBindUni;
     @FXML
-    private JFXSlider slide;
-    
+    private Button btnHeavyTask;
     @FXML
-    private JFXSlider slide2;
-    
+    private Label lblDescription;
     @FXML
-    private JFXTextField txtOther;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        label.setText("Start heavy task...");
-        Thread t = new Thread(()->{
-            simulateHardWork();
-        });
-        t.start();
-        //System.out.println("You clicked me!");
-        
-        
-    }
-    
-    private void simulateHardWork(){
-        try {
-            Thread.sleep(5000);
-            
-            /*
-            Platform.runLater(()->{
-                label.setText("Done working");
-            });
-            */
-                
-                
-            Platform.runLater(new Runnable() 
-            {
-                public void run() 
-                {
-                    label.setText("Done working");
-                }
-            });
-                       
-            
-        }
-        catch (InterruptedException ex) {
-            
-        }
-    }
+    private Label lblHeavyTask;
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        setupInputValidation();
+        setupBindings();    
+    }
+    
+    
+    /**
+     * Examples of bindings
+     */
+    private void setupBindings() {
+        
+        //Bind slider to txtBindUni (uni-directionally)
+//        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+//            txtBindUni.setText(newValue + "");
+//        });
+
+        //Bind two UI controls Bi-directionally
+        Bindings.bindBidirectional(
+                txtDualBind.textProperty(), 
+                slider.valueProperty(), 
+                new ConverterHelper()
+        );
+    }
+    
+    /**
+     * Examples of input validation
+     */
+    private void setupInputValidation() {
         NumberValidator nv = new NumberValidator("Not number?");
         nv.setMessage("WRONG!");
-        txtSomeInput.getValidators().add(nv);
-        txtSomeInput.setText("");
-        txtSomeInput.textProperty().addListener(
+        txtBindUni.getValidators().add(nv);
+        txtBindUni.setText("");
+        txtBindUni.textProperty().addListener(
                 (observable, oldValue, newValue) -> {
-            txtSomeInput.validate();
-            /*
+                    txtBindUni.validate();
+                    /*
             try{
                 Double d = Double.parseDouble(newValue);
             }
@@ -97,38 +85,73 @@ public class MainController implements Initializable {
             {
                 txtSomeInput.setText(oldValue);
             }*/
-        });
-        
-        slide2.valueProperty().addListener((observable, oldValue, newValue) -> {
-            txtSomeInput.setText(newValue+"");
-        });
-        
-        //txtSomeInput.textProperty().bind(txtOther.textProperty());
-        //txtOther.textProperty().set("df");
-        
-        
-        
-        Bindings.bindBidirectional(
-                txtOther.textProperty(), slide2.valueProperty(), new StringConverter<Number>() {
-            @Override
-            public String toString(Number num) {
-                return num.toString();
-            }
+                });
+    }
 
-            @Override
-            public Number fromString(String string) {
-                try{
-                    Double d = Double.parseDouble(string);
-                    return d;
-                }
-                catch (NumberFormatException nfe)
-                {
-                    return 0;
-                }
-            }
-           
-        });
+    /**
+     * Event handler starting a heavy task on a separate thread
+     * 
+     * @param event 
+     */
+    @FXML
+    private void handleStartHeavyTask(ActionEvent event) {
         
-    }    
+        lblHeavyTask.setText("Start heavy task...");
+        
+        //Create new thread using a Lambda expression to handle the heavy task
+        Thread t = new Thread(() -> {
+            simulateHardWork(); //the work...
+        });
+        t.start();
+    }
     
+    
+    /**
+     * 
+     */
+    private void simulateHardWork() {
+        try {
+            Thread.sleep(1); //simulate hard work
+            for (int i = 0; i < 100_000; i++) {
+                System.out.println("Doing boring work on item #" + i);
+            }
+            
+            //Update the UI (in a controlled fashion) that our work is done
+            
+            //Using lambda expression
+//            Platform.runLater(()->{
+//                lblHeavyTask.setText("Done working");
+//            });
+             
+                        
+            //Using annonymous class
+            //Platform.runLater(new Runnable() {
+            //    public void run() {
+                    lblHeavyTask.setText("Done working");
+            //    }
+            //});
+
+        } catch (InterruptedException ex) {
+
+        }
+    }
+}
+
+//Utility class that helps us convert to+from the String/Number
+class ConverterHelper extends StringConverter<Number> {
+
+    @Override
+    public String toString(Number num) {
+        return num.toString();
+    }
+
+    @Override
+    public Number fromString(String string) {
+        try {
+            Double d = Double.parseDouble(string);
+            return d;
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+    }
 }
