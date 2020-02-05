@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package jfeonixexamples;
 
 import com.jfoenix.controls.JFXSlider;
@@ -10,9 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +16,7 @@ import javafx.util.StringConverter;
 
 /**
  *
- * @author jeppjleemoritzled
+ * @author jeppjleemoritzled + sspangsberg
  */
 public class MainController implements Initializable {
     
