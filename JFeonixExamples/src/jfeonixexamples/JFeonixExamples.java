@@ -1,4 +1,3 @@
-
 package jfeonixexamples;
 
 import javafx.application.Application;
@@ -9,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author jeppjleemoritzled + sspangsberg
+ * @author sspangsberg
  */
 public class JFeonixExamples extends Application {
     
@@ -28,6 +27,5 @@ public class JFeonixExamples extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-    
+    }    
 }
