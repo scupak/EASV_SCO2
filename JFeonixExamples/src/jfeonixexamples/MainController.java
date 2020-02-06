@@ -6,6 +6,7 @@ import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RegexValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.StringConverter;
-
 
 /**
  *
@@ -61,27 +61,37 @@ public class MainController implements Initializable {
      * Examples of input validation
      */
     private void setupInputValidation() {
-        //Create validator object
-        NumberValidator nv = new NumberValidator("Not number?");
-        nv.setMessage("WRONG!");
-        
-        //txtBindUni.getValidators().add(nv);
-        //txtBindUni.setText("");
 
-        //Attach Listener to validate any changes...
-        //txtBindUni.textProperty().addListener(
-        //        (observable, oldValue, newValue) -> txtBindUni.validate());
+//        NumberValidator nv = new NumberValidator("Not number?");
+//        nv.setMessage("Input is not a number");
+//
+//        txtBindUni.getValidators().add(nv);
+//        txtBindUni.setText("");
+//
+//        //Attach Listener to validate any changes...
+//        txtBindUni.textProperty().addListener((observable, oldValue, newValue)
+//                -> {
+//             
+//            if (!txtBindUni.validate())
+//                {
+//                    btnHeavyTask.setDisable(true);
+//                }
+//            else
+//                {
+//                    btnHeavyTask.setDisable(false);
+//                }            
+//        });
 
-        RegexValidator valid = new RegexValidator();
-        
-        valid.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        
-        txtBindUni.setValidators(valid);
-        txtBindUni.getValidators().get(0).setMessage("Email is not valid!"); 
-        
-        txtBindUni.textProperty().addListener(
-                (observable, oldValue, newValue) -> txtBindUni.validate());
+          //Regular expression validator to check email
+//        RegexValidator valid = new RegexValidator();
+//        
+//        valid.setRegexPattern("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$");
+//        
+//        txtBindUni.setValidators(valid);
+//        txtBindUni.getValidators().get(0).setMessage("Email is not valid!"); 
+//        
+//        txtBindUni.textProperty().addListener(
+//                (observable, oldValue, newValue) -> txtBindUni.validate());
     }
 
     /**
@@ -113,15 +123,17 @@ public class MainController implements Initializable {
 
             //Update the UI (in a controlled fashion) that our work is done
             //Using lambda expression
-//            Platform.runLater(()->{
-//                lblHeavyTask.setText("Done working");
-//            });
+            Platform.runLater(()->{
+                lblHeavyTask.setText("Done working");
+            });
+            
+            
             //Using annonymous class
-            //Platform.runLater(new Runnable() {
-            //    public void run() {
-            lblHeavyTask.setText("Done working");
-            //    }
-            //});
+//            Platform.runLater(new Runnable() {
+//                public void run() {
+//                    lblHeavyTask.setText("Done working");
+//                }
+//            });
 
         } catch (InterruptedException ex) {
 
