@@ -2,6 +2,7 @@ package menusandcharts;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -35,121 +37,157 @@ public class MenuAppWithChartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        handleShowBarChart();
     }
 
+    /**
+     *  Displays the Bar Chart
+     */
     @FXML
     private void handleShowBarChart() {
 
         borderPane.setCenter(buildBarChart());
     }
 
+    /**
+     *  Displays the Pie Chart
+     */
     @FXML
     private void handleShowPieChart() {
         borderPane.setCenter(buildPieChart());
     }
 
+    /**
+     * Builds the Bar Chart UI component with demo data
+     * 
+     * @return 
+     */
     private BarChart buildBarChart() {
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Most Popular Programming Language");
+        xAxis.setLabel("Product");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("# of developers x 1000");
+        yAxis.setLabel("quantity sold");
 
         BarChart barChart = new BarChart(xAxis, yAxis);
 
         XYChart.Series dataSeries1 = new XYChart.Series();
-        dataSeries1.setName("Popular programming languages rated by GitHub");
+        dataSeries1.setName("Products sold");
 
-        dataSeries1.getData().add(new XYChart.Data("JavaScript", 2300));
-        dataSeries1.getData().add(new XYChart.Data("Python", 1000));
-        dataSeries1.getData().add(new XYChart.Data("Java", 986));
-        dataSeries1.getData().add(new XYChart.Data("Ruby", 870));
-        dataSeries1.getData().add(new XYChart.Data("C++", 413));
-        dataSeries1.getData().add(new XYChart.Data("C#", 326));
+        dataSeries1.getData().add(new XYChart.Data("Product A", 3000));
+        dataSeries1.getData().add(new XYChart.Data("Product B", 1000));
+        dataSeries1.getData().add(new XYChart.Data("Product C", 150));
+        
         barChart.getData().add(dataSeries1);
-
+        barChart.setLegendVisible(false);
+        
         return barChart;
     }
 
+    /**
+     * Builds the Pie Chart UI component with demo data
+     * 
+     * @return 
+     */
     private PieChart buildPieChart() {
 
         //Preparing ObservbleList object         
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("JavaScript", 2300),
-                new PieChart.Data("Python", 1000),
-                new PieChart.Data("Java", 986),
-                new PieChart.Data("Ruby", 870),
-                new PieChart.Data("C++", 413),
-                new PieChart.Data("C#", 326));
+                new PieChart.Data("Product A", 3000),
+                new PieChart.Data("Product B", 1000),                
+                new PieChart.Data("Product C", 150));
 
         PieChart pieChart = new PieChart(pieChartData); //Creating a Pie chart      
-        pieChart.setTitle("Most Popular Programming Language"); //Setting the title of the Pie chart 
+        pieChart.setTitle("Products sold"); //Setting the title of the Pie chart 
         pieChart.setClockwise(true); //setting the direction to arrange the data 
         pieChart.setLabelLineLength(50); //Setting the length of the label line 
         pieChart.setLabelsVisible(true); //Setting the labels of the pie chart visible  
         pieChart.setStartAngle(180);
 
+        
+        for (int i = 0; i < pieChartData.size() - 1; i++) {
+            Data currentElement = pieChartData.get(i);
+            
+            currentElement.nameProperty().bind(Bindings.concat(currentElement.getName(), " ", currentElement.pieValueProperty()));
+        }
+        
+        
+        //pieChartData.forEach(data ->
+        //data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty())));
+        
+        
+        
         ContextMenu contextMenu = new ContextMenu(); //create context menu
         MenuItem miSwitchToBarChart = new MenuItem("Switch to Bar Chart");
         contextMenu.getItems().add(miSwitchToBarChart);
         
         //Add event handler to display context menu
+        //Anonymous inner class
         pieChart.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        if (event.getButton() == MouseButton.SECONDARY) {
-                            contextMenu.show(pieChart, event.getScreenX(), event.getScreenY());
-                        }                        
-                    }
-                });
-               
+            new EventHandler<MouseEvent>() {                
+                public void handle(MouseEvent event) {
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        contextMenu.show(pieChart, event.getScreenX(), event.getScreenY());
+                    }                        
+                }
+            });
         
-        //Pre Java8
+        
+        
+
+//        //Java8
+//        miSwitchToBarChart.setOnAction((ActionEvent event) -> { 
+//            borderPane.setCenter(buildBarChart());
+//            System.out.println("Handling with lambda expression with typed input parameter");       
+//        });
+        
+        //Before Java 8
         //Add event handler to change chart type
-        miSwitchToBarChart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                borderPane.setCenter(buildBarChart());
-                System.out.println("Handling with inner anonymous class");
-            }
-        }); 
+//        miSwitchToBarChart.setOnAction(new EventHandler<ActionEvent>() {            
+//            public void handle(ActionEvent event) {
+//                borderPane.setCenter(buildBarChart());
+//                System.out.println("Handling with inner anonymous class");
+//            }
+//        });        
         
-        
-        //Java8
-        miSwitchToBarChart.setOnAction((ActionEvent event) -> { 
-                borderPane.setCenter(buildBarChart());
-                  System.out.println("Handling with lambda expression with typed input parameter");
-       
-        });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        //Get object from method 
+        miSwitchToBarChart.setOnAction(getEventHandlerObject());
+                
         return pieChart;
     }
+    
+    
+    /**
+     * Creates an event handler as name method
+     * 
+     * @return 
+     */
+    private EventHandler<ActionEvent> getEventHandlerObject() 
+    {
+        return new EventHandler<ActionEvent>() 
+        {
+            public void handle(ActionEvent event) 
+            {
+                borderPane.setCenter(buildBarChart());
+                System.out.println("Handling with named method.");       
+            }
+        };
+    }
+    
+    
+    
+    
 
     /**
-     *
+     *  Event handler to close the application
      */
     @FXML
     private void handleClose() {
         System.exit(0);
     }
-    
-    
+        
     /**
-     * 
+     *  Event handler to update the data in the Pie Chart
      */
     @FXML
     private void handleUpdatePieData() {
@@ -159,9 +197,7 @@ public class MenuAppWithChartController implements Initializable {
         {
             PieChart pc = (PieChart) node;
             double value = pc.getData().get(2).getPieValue();
-            pc.getData().get(2).setPieValue(value * 1.10);
+            pc.getData().get(2).setPieValue(750);
         }
-    }  
-    
-    
+    }          
 }

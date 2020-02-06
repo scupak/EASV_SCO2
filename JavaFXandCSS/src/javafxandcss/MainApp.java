@@ -1,4 +1,5 @@
-package jfeonixexamples;
+
+package javafxandcss;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +9,16 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author sspangsberg
+ * @author Søren Spangsberg
  */
-public class JFeonixExamples extends Application {
+public class MainApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginUI.fxml"));
         
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass()..getResource("style.css").toExternalForm());
         
         stage.setScene(scene);
         stage.show();
