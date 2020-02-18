@@ -46,15 +46,17 @@ public class MainController implements Initializable {
     private void setupBindings() {
 
         //Bind slider to txtBindUni (uni-directionally)
-//        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-//            txtBindUni.setText(newValue + "");
-//        });
-        //Bind two UI controls Bi-directionally
-        Bindings.bindBidirectional(
-                txtDualBind.textProperty(),
-                slider.valueProperty(),
-                new ConverterHelper()
-        );
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            txtBindUni.setText(newValue + "");
+        });
+        
+        
+//        //Bind two UI controls Bi-directionally
+//        Bindings.bindBidirectional(
+//                txtDualBind.textProperty(),
+//                slider.valueProperty(),
+//                new ConverterHelper()
+//        );
     }
 
     /**
