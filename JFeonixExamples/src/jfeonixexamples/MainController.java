@@ -1,9 +1,8 @@
 package jfeonixexamples;
 
+
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RegexValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
