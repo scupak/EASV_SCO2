@@ -8,15 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PreparedStatements.jar" size="6596" download="eager" />
-    <jar href="lib/mssql-jdbc-7.2.1.jre8.jar" size="1181676" download="eager" />
+    <jar href="PreparedStatements.jar" size="4924" download="eager" />
+    <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
+    <jar href="lib\mssql-jdbc-8.2.0.jre8.jar" size="1265991" download="eager" />
   </resources>
-<security>
-  <all-permissions/>
-</security>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PreparedStatements" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="preparedstatements.PreparedStatements"  name="PreparedStatements" />
   <update check="always"/>
 </jnlp>
