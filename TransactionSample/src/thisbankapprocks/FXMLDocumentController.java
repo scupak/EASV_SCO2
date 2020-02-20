@@ -41,34 +41,31 @@ public class FXMLDocumentController implements Initializable {
         PreparedStatement depositMoney = null;
         
         //Create helper SQL vars
-        String withdrawMoneySQL = "UPDATE BankAccount SET Balance = Balance - ?, Holder=? WHERE AccountID = ?";
-        String depositMoneySQL = "UPDATE BankAccount SET Balance = Balance + ?, Holder=? WHERE AccountID = ?";
+        String withdrawMoneySQL = "UPDATE Account SET Balance = Balance - ?, Holder=? WHERE AccountID = ?";
+        String depositMoneySQL = "UPDATE Account SET Balance = Balance + ?, Holder=? WHERE AccountID = ?";
         
         try {
            
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); //use SQL Server JDBC driver
-            conn = DriverManager.getConnection(connectionString);
+            conn = DBConnection.getConnection();
             
             //Tell SQL Server not to auto-commit all statements - we have to do this manually
             conn.setAutoCommit(false); 
            
-            //SQL statement #1
+            //SQL statement #1 - withdraw 1000 from Bilbos account
             withdrawMoney = conn.prepareStatement(withdrawMoneySQL);
-            withdrawMoney.setDouble(1, 1000);
-            withdrawMoney.setString(2, "Short");
-            withdrawMoney.setInt(3, 1);
+            withdrawMoney.setDouble(1, 1000); //money
+            withdrawMoney.setString(2, "Bilbo"); //holder name
+            withdrawMoney.setInt(3, 1); //account id
             withdrawMoney.executeUpdate();          
             
-            //SQL statement #2
+            //SQL statement #2 - deposit 1000 to Frodos account
             depositMoney = conn.prepareStatement(depositMoneySQL);
-            depositMoney.setDouble(1, 1000);
+            depositMoney.setDouble(1, 1000); //money
             
             //exceeding maximum nvarchar(10) limit --> SQL Exception
-            //will cause rollback in catch clause
-            depositMoney.setString(2, "Reeeeaaaaallllyy long holder name");
-            //depositMoney.setString(2, "Bilbo"); //no exception
-            
-            depositMoney.setInt(3, 2);  
+            //will cause rollback in catch clause            
+            depositMoney.setString(2, "Frodo222222222222"); //holder name - no exception            
+            depositMoney.setInt(3, 2);  //account ID
             depositMoney.executeUpdate();
             
             //if we are here, it means no exceptions and we can commit the updates
@@ -86,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
         finally
         {   
             if (conn != null) {
-                conn.setAutoCommit(true); //set default again (will actually commit the last transaction)
+                conn.setAutoCommit(true); //set default again 
                 conn.close(); //close the connection --> if no conn.commit() it will rollback
             }                
         }

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ThisBankAppRocks.jar" size="3682" download="eager" />
+    <jar href="ThisBankAppRocks.jar" size="4288" download="eager" />
     <jar href="lib\mssql-jdbc-8.2.0.jre8.jar" size="1265991" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="thisbankapprocks.ThisBankAppRocks"  name="ThisBankAppRocks" />
