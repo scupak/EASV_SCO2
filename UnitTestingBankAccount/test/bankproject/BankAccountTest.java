@@ -11,16 +11,13 @@ import org.junit.Before;
  */
 public class BankAccountTest {
 
-    public BankAccountTest() {
-    }
+    public BankAccountTest() {}
 
     @Before
-    public void setUp() {
-    }
+    public void setUp() {}
 
     @After
-    public void tearDown() {
-    }
+    public void tearDown() {}
 
     /**
      * Test of deposit method, of class BankAccount.
@@ -38,7 +35,9 @@ public class BankAccountTest {
         assertEquals(initialBalance + amount + 0.001, account.getBalance(), 1E-3); //0.002        
     }
     
-    
+    /**
+     * 
+     */
     @Test//(expected = IllegalArgumentException.class)
     public void testSetInterestRate() {
         System.out.println("BankAccountTest:testSetInterestRate");
@@ -49,7 +48,9 @@ public class BankAccountTest {
     }
     
     
-
+    /**
+     * 
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testWithdrawPositiveAmount() {
         System.out.println("BankAccountTest:testWithdrawPositiveAmount");
@@ -68,20 +69,13 @@ public class BankAccountTest {
     @Test(expected = IllegalArgumentException.class)
     public void testWithdrawExceedingAmount() {
         System.out.println("BankAccountTest:testWithdrawExceedingAmount");
-        
         BankAccount account = new BankAccount(1111, 1000.0);
         
         try {
-            account.withdraw(2000.0); 
-            
+            account.withdraw(2000.0);
         }
         finally {
-            
-            
-            assertEquals(1000.0, account.getBalance(), 1E-3);
-            
-            
-            
+            assertEquals(1000.0, account.getBalance(), 1E-3);            
         }
     }
 
@@ -98,8 +92,7 @@ public class BankAccountTest {
         BankAccount account = new BankAccount(1111, 1000.0);
 
         try {
-            account.deposit(-1);
-            
+            account.deposit(-1);            
         } finally {
             assertEquals(1000.0, account.getBalance(), 1E-3);
         }
@@ -123,7 +116,9 @@ public class BankAccountTest {
         }
     }
     
-    
+    /**
+     * 
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSetInterestRateOutsideValidRange() {
         System.out.println("BankAccountTest:testSetInterestRateOutsideValidRange");

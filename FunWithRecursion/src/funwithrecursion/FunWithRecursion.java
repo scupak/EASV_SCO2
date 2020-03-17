@@ -17,13 +17,13 @@ public class FunWithRecursion {
         //System.out.println(factorialIterative(5));
         //System.out.println(factorialRecursive(50));
         
-        //helloWorldRecsursive(5);
+        //helloWorldRecursive(5);
         
-        //countDown(3);
+        //countDown(10);
         
         //System.out.println(sum(3));
         
-        move(3,'A','B','C');
+        //move(3,'A','B','C');
         //System.out.println("Moves: " + Math.pow(2, 3));
     } 
     
@@ -139,6 +139,18 @@ public class FunWithRecursion {
         System.out.print(counter + " ");
         if (counter > 0) 
             countDown(counter - 1); // countDown() calls itself!!!! 
+        
+        /*
+        
+        countDown(5 - 1)
+        countDown(4 - 1)
+        countDown(3 - 1)
+        countDown(2 - 1)
+        countDown(1 - 1)
+        false
+        
+        */
+        
         
         //System.out.println("");
         //for (int i = counter; i > 0; i--) 

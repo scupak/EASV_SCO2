@@ -15,9 +15,11 @@ import java.sql.SQLException;
  */
 public class DBConnection {
     public final static String DB_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public final static String DB_URL = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=UserDB";
-    public final static String DB_USERNAME = "dbuser";
-    public final static String DB_PASSWORD = "123456";
+    public final static String DB_URL = "jdbc:sqlserver://10.176.111.31;databaseName=UserDB42";
+    //public final static String DB_URL = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=UserDB";
+    
+    public final static String DB_USERNAME = "smsj";
+    public final static String DB_PASSWORD = "easv_smsj";
 
     /**
      * 
