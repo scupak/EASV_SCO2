@@ -32,22 +32,21 @@ public class BankAccountTest {
         BankAccount account = new BankAccount(1111, initialBalance);
 
         account.deposit(amount);
-        assertEquals(initialBalance + amount + 0.001, account.getBalance(), 1E-3); //0.002        
+        assertEquals(initialBalance + amount, account.getBalance(), 1E-1); //0.1 allowed in diff      
     }
     
     /**
      * 
      */
-    @Test//(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testSetInterestRate() {
         System.out.println("BankAccountTest:testSetInterestRate");
         
         BankAccount acc = new BankAccount(1111,1000);
-        acc.setInterestRate(0.05);
-        assertEquals(0.05, acc.getInterestRate(), 1E-3);        
+        acc.setInterestRate(-0.05);
+        assertEquals(-0.05, acc.getInterestRate(), 1E-3);        
     }
-    
-    
+        
     /**
      * 
      */
@@ -62,7 +61,7 @@ public class BankAccountTest {
             
         }
         finally {
-            assertEquals(1000.0, account.getBalance(), 1E-3);
+            assertEquals(1000.0, account.getBalance(), 1E-3); 
         }
     }
     
