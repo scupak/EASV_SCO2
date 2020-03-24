@@ -18,6 +18,19 @@ public class MovieManager {
         return movieList;
     }
     
+    
+    
+    /*
+    
+    */
+    public void addMovies(Movie... m) {
+        for (Movie movie : m) {
+            movieList.add(movie);
+        }
+    }
+    
+    
+    
     @Override
     public String toString() {
         return "MovieManager{" + "movieList=" + movieList + '}';
