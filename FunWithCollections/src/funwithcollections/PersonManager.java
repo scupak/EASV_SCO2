@@ -13,9 +13,11 @@ import java.util.PriorityQueue;
  */
 public class PersonManager {
 
-    List<Person> persons = new ArrayList();
+    //List<Person> persons = new ArrayList();
     //LinkedList<Person> persons = new LinkedList();
-    //Deque<Person> persons = new ArrayDeque();    
+    Deque<Person> persons = new ArrayDeque();
+    //Deque<Person> persons = new LinkedList();
+    
     //PriorityQueue<Person> persons = new PriorityQueue();
     
     
@@ -38,21 +40,21 @@ public class PersonManager {
 
     // ArrayList START **************************************************
     
-    /**
-     * 
-     * @return 
-     */
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    /**
-     * 
-     * @param persons 
-     */
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }    
+//    /**
+//     * 
+//     * @return 
+//     */
+//    public List<Person> getPersons() {
+//        return persons;
+//    }
+//
+//    /**
+//     * 
+//     * @param persons 
+//     */
+//    public void setPersons(List<Person> persons) {
+//        this.persons = persons;
+//    }    
     
     // ArrayList END **************************************************
     
@@ -74,14 +76,15 @@ public class PersonManager {
 //    public void setPersons(LinkedList<Person> persons) {
 //        this.persons = persons;
 //    }
+//    
 //    /**
 //     * 
 //     * @return 
 //     */
-//    public Person getNextPerson() {
+//    public Person getNextPerson() {        
 //        return this.persons.removeFirst();
 //    }
-//    
+    
 //    
 //    /**
 //     * 
@@ -99,36 +102,36 @@ public class PersonManager {
     
     // DeQue START **************************************************
     
-//    /**
-//     *
-//     * @return
-//     */
-//    public Deque<Person> getPersons() {
-//        return persons;
-//    }
-//
-//    /**
-//     *
-//     * @param persons
-//     */
-//    public void setPersons(Deque<Person> persons) {
-//        this.persons = persons;
-//    }
-//
-//    /**
-//     *
-//     * @return
-//     */
-//    public Person getNextPerson() {
-//        return this.persons.poll();
-//    }
-//    /**
-//     *
-//     * @return
-//     */
-//    public Person whoIsNext() {
-//        return this.persons.peek();
-//    }
+    /**
+     *
+     * @return
+     */
+    public Deque<Person> getPersons() {
+        return persons;
+    }
+
+    /**
+     *
+     * @param persons
+     */
+    public void setPersons(Deque<Person> persons) {
+        this.persons = persons;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Person getNextPerson() {
+        return this.persons.poll();
+    }
+    /**
+     *
+     * @return
+     */
+    public Person whoIsNext() {
+        return this.persons.peek();
+    }
 
 //    
     // DeQueue END **************************************************
