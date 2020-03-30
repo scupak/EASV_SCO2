@@ -32,16 +32,19 @@ public class HashingExample
         for (int i = 0; i < SIZE; i++)
             hm.put("MyKeyNumber: " + i, "Not the droid you are looking for");
         
+        
         //Hashtable (Obsolete) O(1) - constant time
         ht.put("MyKeyNumber: " + SIZE + 1, "The droid you have been looking for ;)");
         for (int i = 0; i < SIZE; i++)
             ht.put("MyKeyNumber: " + i, "Not the droid you are looking for");
+        
         
         //ArrayList (linear) O(N) - linear time
         ArrayList<String> al = new ArrayList(hs);
         for (int i = 0; i < SIZE + 1; i++)
             al.add("Not the droid you are looking for");
         al.add("The droid you have been looking for ;)");
+        
         System.out.println("Initializing items......Done");
                 
         
