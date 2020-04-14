@@ -7,13 +7,13 @@ import java.util.List;
  * @author spangsberg
  */
 public class Searcher {
-    private SearchStrategy strategy;
+    private ISearchStrategy strategy;
 
-    public Searcher(SearchStrategy strategy) {
+    public Searcher(ISearchStrategy strategy) {
         this.strategy = strategy;
     }
     
-    public int executeSearch(List<ComputerGame> objects, ComputerGame wanted) {
+    public <T extends Comparable<T>> int executeSearch(List<T> objects, T wanted) {
         return strategy.doSearch(objects, wanted);
     }
 }
